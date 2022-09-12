@@ -3,21 +3,30 @@
 body {
   display: flex;
   flex-direction: column;
-  font-family: Arial;
+  font-family: Georgia;
   min-height: 100vh;
+  background: url('../../assets/photos/pixabay_universum_arek_socha.jpg');
 }
 
 header {
-  /* header styles */
+  color: white;
+  text-align: center;
+  font-size: 32px;
+  background-color: rgb(21, 21, 86);
+  border-radius: 18px;
 }
 
 main {
+  color: white;
   flex: 1;
   padding: 20px;
 }
 
 footer {
-  /* footer styles */
+  color: white;
+  text-align: center;
+  background-color: rgb(21, 21, 86);
+  border-radius: 18px;
 }
 
 /* -------------------  TABLET  --------------------- */
