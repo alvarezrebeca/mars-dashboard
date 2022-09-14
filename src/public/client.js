@@ -22,6 +22,7 @@ const App = (state) => {
 
   return `
         <header>Mars Dashboard</header>
+        ${Dropdown(rovers)}
         <main>
             ${Greeting(store.user.name)}
             <section>
@@ -59,6 +60,14 @@ const Greeting = (name) => {
   return `
         <h1>Hello!</h1>
     `;
+};
+
+const Dropdown = (rovers) => {
+  const roversOption = rovers.map((roversElem) => {
+    return `<option value="${roversElem}">${roversElem}</option>`;
+  });
+
+  return `<form><label for="rover">Rovers Selection:</label><select name="rover" id="rover">${roversOption}</select></form>`;
 };
 
 // Example of a pure function that renders infomation requested from the backend

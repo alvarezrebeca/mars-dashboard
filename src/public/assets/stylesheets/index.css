@@ -13,7 +13,18 @@ header {
   text-align: center;
   font-size: 32px;
   background-color: rgb(21, 21, 86);
-  border-radius: 18px;
+}
+
+form {
+  background-color: rgb(21, 21, 86);
+  text-align: center;
+  padding: 5px;
+}
+
+select {
+  color: white;
+  background-color: rgb(21, 21, 86);
+  text-align: center;
 }
 
 main {
@@ -26,7 +37,6 @@ footer {
   color: white;
   text-align: center;
   background-color: rgb(21, 21, 86);
-  border-radius: 18px;
 }
 
 /* -------------------  TABLET  --------------------- */
