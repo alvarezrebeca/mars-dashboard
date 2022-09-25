@@ -2,6 +2,7 @@ let store = {
   user: { name: 'Reviewer' },
   apod: '',
   rovers: ['Curiosity', 'Opportunity', 'Spirit'],
+  roversData: [],
 };
 
 // add our markup to the page
@@ -18,33 +19,32 @@ const render = async (root, state) => {
 
 // create content
 const App = (state) => {
-  let { rovers, apod } = state;
+  let { rovers, apod, roversData } = state;
 
   return `
         <header>Mars Dashboard</header>
-        ${Dropdown(rovers)}
-        <main>
-            ${Greeting(store.user.name)}
-            <section>
-                <h3>Put things on the page!</h3>
-                <p>Here is an example section.</p>
-                <p>
-                    One of the most popular websites at NASA is the Astronomy Picture of the Day. In fact, this website is one of
-                    the most popular websites across all federal agencies. It has the popular appeal of a Justin Bieber video.
-                    This endpoint structures the APOD imagery and associated metadata so that it can be repurposed for other
-                    applications. In addition, if the concept_tags parameter is set to True, then keywords derived from the image
-                    explanation are returned. These keywords could be used as auto-generated hashtags for twitter or instagram feeds;
-                    but generally help with discoverability of relevant imagery.
-                </p>
-            </section>
-        </main>
+          <div id="navBar">
+            ${NavBar(rovers)}
+          </div>
+          <div id="content">
+          ${Greeting(store.user.name)}
+          <section>
+              <h3>Please select the rover, which you want to see at the top!</h3>
+              <p>Here you can see, the "apod" picture from the starter code.</p>
+              
+              <img src="${roversData[0].img_src}" height="200px" width="200px" />
+          </section>
+          ${ImageOfTheDay(apod)}
+          </div>
         <footer>Student: Rebeca Alvarez Morales</footer>
     `;
 };
 
 // listening for load event because page should load before any JS is called
 window.addEventListener('load', () => {
+  store.rovers.forEach((rover) => getRoverData(store, rover));
   render(root, store);
+  console.log(store);
 });
 
 // ------------------------------------------------------  COMPONENTS
@@ -52,22 +52,17 @@ window.addEventListener('load', () => {
 // Pure function that renders conditional information -- THIS IS JUST AN EXAMPLE, you can delete it.
 const Greeting = (name) => {
   if (name) {
-    return `
-            <h1>Welcome, ${name}!</h1>
-        `;
+    return `<h1>Welcome, ${name}!</h1>`;
   }
 
-  return `
-        <h1>Hello!</h1>
-    `;
+  return `<h1>Hello!</h1>`;
 };
 
-const Dropdown = (rovers) => {
-  const roversOption = rovers.map((roversElem) => {
-    return `<option value="${roversElem}">${roversElem}</option>`;
+const NavBar = (rovers) => {
+  const roversButton = rovers.map((roversElem) => {
+    return `<li><button id="${roversElem}" onclick=createRoverContent('${roversElem}')>${roversElem}</button></li>`;
   });
-
-  return `<form><label for="rover">Rovers Selection:</label><select name="rover" id="rover">${roversOption}</select></form>`;
+  return `<ul class="navBar">${roversButton.join('')}</ul>`;
 };
 
 // Example of a pure function that renders infomation requested from the backend
@@ -99,6 +94,15 @@ const ImageOfTheDay = (apod) => {
 
 // ------------------------------------------------------  API CALLS
 
+// rover API call
+const getRoverData = (state, rover) => {
+  let { roversData } = state;
+
+  fetch(`http://localhost:3000/photos/${rover}`)
+    .then((res) => res.json())
+    .then((roversData) => updateStore(store, { roversData }));
+};
+
 // Example API call
 const getImageOfTheDay = (state) => {
   let { apod } = state;
@@ -106,6 +110,4 @@ const getImageOfTheDay = (state) => {
   fetch(`http://localhost:3000/apod`)
     .then((res) => res.json())
     .then((apod) => updateStore(store, { apod }));
-
-  return data;
 };
