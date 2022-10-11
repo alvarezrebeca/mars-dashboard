@@ -55,11 +55,6 @@ p {
 }
 
 .imgRoverPhoto {
-  width: 500px;
-  height: 500px;
-}
-
-.roverDiv {
   width: 200px;
   height: 200px;
 }
@@ -81,16 +76,28 @@ footer {
 /* -------------------  TABLET  --------------------- */
 @media (min-width: 768px) {
   /* use mobile */
+  .imgRoverPhoto {
+    width: 300px;
+    height: 300px;
+  }
 }
 
 /* -------------------  DESKTOP  -------------------- */
 
 @media (min-width: 1224px) {
   /* use mobile */
+  .imgRoverPhoto {
+    width: 400px;
+    height: 400px;
+  }
 }
 
 /* -------------------  LARGE SCREENS  -------------- */
 
 @media (min-width: 1824px) {
   /* use mobile */
+  .imgRoverPhoto {
+    width: 500px;
+    height: 500px;
+  }
 }
