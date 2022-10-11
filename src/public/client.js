@@ -3,7 +3,6 @@ let store = {
   apod: '',
   rovers: ['Opportunity', 'Spirit', 'Curiosity'],
   roversData: [],
-  selectedRover: [],
 };
 
 // add our markup to the page
@@ -68,8 +67,6 @@ const NavBar = (rovers) => {
 const createRoverInfo = async (selectedRover) => {
   await getRoverData(store, selectedRover);
 
-  console.log(store.roversData);
-
   const roverDiv = document.getElementById('roverDiv');
 
   // Create roverInfo div
@@ -94,16 +91,13 @@ const createRoverInfo = async (selectedRover) => {
 
   const createImgElem = (contentPhoto) => {
     const img = document.createElement('img');
-    console.log('Funktion:' + contentPhoto);
     img.src = `${contentPhoto}`;
     img.className = 'imgRoverPhoto';
-    console.log('Ausgabe create img:' + img.src);
     return img;
   };
 
   for (count = 0; count < store.roversData.length; count++) {
     const { img_src } = store.roversData[count];
-    console.log(img_src);
     roverPhotos.append(createImgElem(img_src));
   }
 
@@ -120,9 +114,7 @@ const ImageOfTheDay = (apod) => {
   // If image does not already exist, or it is not from today -- request it again
   const today = new Date();
   const photodate = new Date(apod.date);
-  console.log('Ausgabe 1', photodate.getDate(), today.getDate());
 
-  console.log('Ausgabe 2', photodate.getDate() === today.getDate());
   if (!apod || apod.date === today.getDate()) {
     getImageOfTheDay(store);
   }
