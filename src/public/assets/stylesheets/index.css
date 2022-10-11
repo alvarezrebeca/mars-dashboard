@@ -38,6 +38,32 @@ ul.navBar button:hover {
   background-color: cornflowerblue;
 }
 
+p {
+  color: white;
+}
+
+.apod {
+  height: 600px;
+  width: 100%;
+}
+
+.roverInfo,
+.roverPhotos {
+  border-style: groove;
+  border-color: cornflowerblue;
+  padding: 0px 6px;
+}
+
+.imgRoverPhoto {
+  width: 500px;
+  height: 500px;
+}
+
+.roverDiv {
+  width: 200px;
+  height: 200px;
+}
+
 main {
   color: white;
   flex: 1;
@@ -45,9 +71,11 @@ main {
 }
 
 footer {
+  display: block;
   color: white;
   text-align: center;
   background-color: rgb(21, 21, 86);
+  padding: 6px;
 }
 
 /* -------------------  TABLET  --------------------- */

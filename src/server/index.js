@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 
 app.use('/', express.static(path.join(__dirname, '../public')));
 
-// rovers images API call
+// rovers data API call
 app.get('/photos/:name', async (req, res) => {
   try {
     const rover = req.params.name;
